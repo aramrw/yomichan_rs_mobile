@@ -1,1 +1,1 @@
-RUSTFLAGS="-Awarnings" cargo r --package gpui-mobile-example
+RUSTFLAGS="-Awarnings" cargo r --release

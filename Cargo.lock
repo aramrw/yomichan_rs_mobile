@@ -2792,36 +2792,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "gpui-mobile-example"
-version = "0.1.0"
-dependencies = [
- "android-activity",
- "android_logger",
- "anki_direct",
- "anyhow",
- "env_logger",
- "getset",
- "gpui",
- "gpui-mobile",
- "indexmap 2.14.0",
- "log",
- "native_model",
- "objc",
- "parking_lot",
- "portable_async_sleep",
- "postcard",
- "rapidhash",
- "regex",
- "reqwest_client",
- "rusqlite",
- "serde",
- "tracing",
- "unidecode",
- "yomichan_rs",
- "zed-reqwest",
-]
-
-[[package]]
 name = "gpui_macos"
 version = "0.1.0"
 dependencies = [
@@ -9154,6 +9124,36 @@ dependencies = [
  "uuid",
  "yomichan_importer",
  "zip",
+]
+
+[[package]]
+name = "yomichanrs_mobile"
+version = "0.0.1"
+dependencies = [
+ "android-activity",
+ "android_logger",
+ "anki_direct",
+ "anyhow",
+ "env_logger",
+ "getset",
+ "gpui",
+ "gpui-mobile",
+ "indexmap 2.14.0",
+ "log",
+ "native_model",
+ "objc",
+ "parking_lot",
+ "portable_async_sleep",
+ "postcard",
+ "rapidhash",
+ "regex",
+ "reqwest_client",
+ "rusqlite",
+ "serde",
+ "tracing",
+ "unidecode",
+ "yomichan_rs",
+ "zed-reqwest",
 ]
 
 [[package]]
