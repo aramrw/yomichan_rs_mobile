@@ -1,0 +1,369 @@
+// //! Home screen — welcome message, colour swatches, and quick-nav cards.
+//
+// use gpui::{div, prelude::*, px, rgb};
+//
+// use super::{Router, Screen, BLUE, GREEN, LAVENDER, LIGHT_CARD_BG, LIGHT_SUBTEXT, LIGHT_TEXT, MAUVE, PEACH, RED, SKY, SURFACE0, TEAL, TEXT, YELLOW};
+//
+// /// Render the Home screen content area.
+// ///
+// /// Takes a reference to the `Router` for reading shared state and a mutable
+// /// context for wiring up `cx.listener` navigation handlers on the nav cards.
+// pub fn render(router: &Router, cx: &mut gpui::Context<Router>) -> impl IntoElement {
+//     let user_name = router.user_name.clone();
+//     let tap_count = router.tap_count;
+//     let text_color = if router.dark_mode { TEXT } else { LIGHT_TEXT };
+//     let card_bg = if router.dark_mode { SURFACE0 } else { LIGHT_CARD_BG };
+//     let sub_text = if router.dark_mode {
+//         super::SUBTEXT
+//     } else {
+//         LIGHT_SUBTEXT
+//     };
+//
+//     div()
+//         .flex()
+//         .flex_col()
+//         .flex_1()
+//         .gap_4()
+//         .px_4()
+//         .py_6()
+//         // ── Welcome banner ───────────────────────────────────────────────
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_col()
+//                 .gap_1()
+//                 .child(
+//                     div()
+//                         .text_sm()
+//                         .text_color(rgb(text_color))
+//                         .child(format!("Hello, {}!", &user_name)),
+//                 )
+//                 .child(
+//                     div()
+//                         .text_sm()
+//                         .text_color(rgb(sub_text))
+//                         .child("Welcome to the GPUI mobile demo"),
+//                 ),
+//         )
+//         // ── Colour swatches ──────────────────────────────────────────────
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_col()
+//                 .gap_2()
+//                 .child(
+//                     div()
+//                         .text_sm()
+//                         .text_color(rgb(sub_text))
+//                         .child("Google colour palette"),
+//                 )
+//                 .child(
+//                     div()
+//                         .flex()
+//                         .flex_row()
+//                         .gap_2()
+//                         .child(swatch(BLUE))
+//                         .child(swatch(GREEN))
+//                         .child(swatch(MAUVE))
+//                         .child(swatch(YELLOW))
+//                         .child(swatch(PEACH))
+//                         .child(swatch(TEAL)),
+//                 ),
+//         )
+//         // ── Stats card ───────────────────────────────────────────────────
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_row()
+//                 .gap_3()
+//                 .child(stat_card(
+//                     "Total taps",
+//                     &tap_count.to_string(),
+//                     BLUE,
+//                     card_bg,
+//                     text_color,
+//                 ))
+//                 .child(stat_card("Screens", "4", GREEN, card_bg, text_color)),
+//         )
+//         // ── Quick-nav cards ──────────────────────────────────────────────
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_col()
+//                 .gap_2()
+//                 .child(
+//                     div()
+//                         .text_sm()
+//                         .text_color(rgb(sub_text))
+//                         .child("Explore screens"),
+//                 )
+//                 .child(nav_card(
+//                     "🔢",
+//                     "Counter",
+//                     "Tap the button and watch it count",
+//                     BLUE,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Counter);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🍎",
+//                     "Apple Liquid Glass",
+//                     "Frosted panels, vibrancy & SF-style controls",
+//                     TEAL,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::AppleGlass);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🎨",
+//                     "Material Design 3",
+//                     "Elevation, FABs, chips & outlined fields",
+//                     GREEN,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Material);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "📝",
+//                     "Material Form",
+//                     "Text fields, controls, switches & sliders",
+//                     LAVENDER,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Form);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "⚙️",
+//                     "Settings",
+//                     "Toggle dark mode and configure options",
+//                     MAUVE,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Settings);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "ℹ️",
+//                     "About",
+//                     "Learn about GPUI and this example app",
+//                     SKY,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::About);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "📦",
+//                     "Packages",
+//                     "Device info, paths, prefs, vibration & more",
+//                     PEACH,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::PackagesDemo);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🎾",
+//                     "Animations",
+//                     "Bouncing balls, physics trails & particles",
+//                     YELLOW,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Animations);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🌊",
+//                     "Shaders",
+//                     "Dynamic gradients, orbs & ripple effects",
+//                     PEACH,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Shaders);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "💘",
+//                     "Swiper",
+//                     "Tinder-style swipeable card stack",
+//                     RED,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Swiper);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "📷",
+//                     "Feed",
+//                     "Instagram-style photo feed with likes",
+//                     MAUVE,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Feed);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "💬",
+//                     "Chat",
+//                     "iMessage-style chat with reactions & images",
+//                     BLUE,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::Chat);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🎵",
+//                     "Audio Player",
+//                     "Stream music with playback controls & seek",
+//                     GREEN,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::AudioPlayer);
+//                         cx.notify();
+//                     }),
+//                 ))
+//                 .child(nav_card(
+//                     "🎬",
+//                     "Video Player",
+//                     "Play videos with controls, speed & looping",
+//                     MAUVE,
+//                     card_bg,
+//                     text_color,
+//                     sub_text,
+//                     cx.listener(|this, _event, _window, cx| {
+//                         this.navigate_to(Screen::VideoPlayer);
+//                         cx.notify();
+//                     }),
+//                 )),
+//         )
+// }
+//
+// // ── Helpers ──────────────────────────────────────────────────────────────────
+//
+// /// A small coloured square swatch.
+// fn swatch(color: u32) -> impl IntoElement {
+//     div().size_10().rounded_lg().bg(rgb(color))
+// }
+//
+// /// A small card showing a numeric stat.
+// fn stat_card(label: &str, value: &str, accent: u32, bg: u32, text_color: u32) -> impl IntoElement {
+//     div()
+//         .flex_1()
+//         .flex()
+//         .flex_row()
+//         .gap_3()
+//         .p_4()
+//         .rounded_sm()
+//         .bg(rgb(bg))
+//         .items_center()
+//         .child(div().w(px(4.0)).h_full().rounded_sm().bg(rgb(accent)))
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_col()
+//                 .gap_1()
+//                 .child(
+//                     div()
+//                         .text_2sm()
+//                         .text_color(rgb(text_color))
+//                         .child(value.to_string()),
+//                 )
+//                 .child(
+//                     div()
+//                         .text_xs()
+//                         .text_color(rgb(accent))
+//                         .child(label.to_string()),
+//                 ),
+//         )
+// }
+//
+// /// A navigation card that shows an icon, title, and description.
+// ///
+// /// Tapping the card triggers the provided `handler`, which should navigate
+// /// to the target screen via `Router::navigate_to`.
+// fn nav_card(
+//     icon: &str,
+//     title: &str,
+//     description: &str,
+//     accent: u32,
+//     bg: u32,
+//     text_color: u32,
+//     sub_text: u32,
+//     handler: impl Fn(&gpui::MouseDownEvent, &mut gpui::Window, &mut gpui::App) + 'static,
+// ) -> impl IntoElement {
+//     div()
+//         .flex()
+//         .flex_row()
+//         .gap_3()
+//         .p_4()
+//         .rounded_sm()
+//         .bg(rgb(bg))
+//         .items_center()
+//         .child(div().w(px(4.0)).h_full().rounded_sm().bg(rgb(accent)))
+//         .child(div().text_2sm().child(icon.to_string()))
+//         .child(
+//             div()
+//                 .flex()
+//                 .flex_col()
+//                 .flex_1()
+//                 .gap_1()
+//                 .child(
+//                     div()
+//                         .text_base()
+//                         .text_color(rgb(text_color))
+//                         .child(title.to_string()),
+//                 )
+//                 .child(
+//                     div()
+//                         .text_xs()
+//                         .text_color(rgb(sub_text))
+//                         .child(description.to_string()),
+//                 ),
+//         )
+//         .child(div().text_sm().text_color(rgb(accent)).child("→"))
+//         .on_mouse_down(gpui::MouseButton::Left, handler)
+// }

@@ -1,0 +1,62 @@
+[package]
+name = "yomichanrs_mobile"
+version = "0.0.1"
+edition = "2021"
+description = "Cross-platform GPUI dictionary app for Android and iOS"
+publish = false
+
+[lib]
+name = "gpui_mobile_example"
+crate-type = ["cdylib", "staticlib", "lib"]
+path = "src/lib.rs"
+
+[dependencies]
+gpui-mobile = { path = "../gpui-mobile", features = ["file_selector"] }
+gpui = { git = "https://github.com/zed-industries/zed", rev = "4dd42a0f77b11d0bed2a072919bcd9180b9a577c", package = "gpui", default-features = false }
+reqwest_client = { git = "https://github.com/zed-industries/zed", rev = "4dd42a0f77b11d0bed2a072919bcd9180b9a577c", package = "reqwest_client" }
+reqwest = { git = "https://github.com/zed-industries/reqwest.git", rev = "c15662463bda39148ba154100dd44d3fba5873a4", package = "zed-reqwest", default-features = false, features = ["rustls-tls"] }
+log = "0.4"
+env_logger = "0.11"
+yomichan_rs = { path = "../yomichan_rs", features = ["anki"] }
+parking_lot = { version = "0.12.4", features = ["arc_lock", "serde", "send_guard"] }
+rusqlite = "0.33.0"
+anyhow = "1.0"
+tracing = { version = "0.1", features = ["async-await"] }
+unidecode = "0.3"
+regex = "1.11"
+portable_async_sleep = "0.1"
+rapidhash = { version = "4.1", features = ["unsafe"] }
+getset = "0.1.6"
+indexmap = { version = "2.7", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+postcard = { version = "1.1.3", features = ["use-std"] }
+native_model = { version = "0.6.2", features = ["rmp_serde_1_3", "postcard_1_0"] }
+anki_direct = { git = "https://github.com/aramrw/anki_direct", branch = "note", version = "0.0.14" }
+
+[target.'cfg(target_os = "ios")'.dependencies]
+objc = "0.2"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2"
+
+[target.'cfg(target_os = "android")'.dependencies]
+android_logger = "0.15"
+android-activity = { version = "0.6", features = ["native-activity"] }
+
+[patch.crates-io]
+async-task = { git = "https://github.com/smol-rs/async-task.git", rev = "b4486cd71e4e94fbda54ce6302444de14f4d190e" }
+
+[patch."https://github.com/zed-industries/zed"]
+gpui_util = { path = "../gpui-mobile/crates/gpui_util" }
+collections = { path = "../gpui-mobile/crates/collections" }
+gpui_macos = { path = "../gpui-mobile/crates/gpui_macos" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true

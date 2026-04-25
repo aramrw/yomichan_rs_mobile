@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E00101AFAD0D35CE255EF1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DD8419A8C9FF5F8D24A98E4 /* Assets.xcassets */; };
+		0FFB664B252FC76E0609B2F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3336065AC278921C4D3F1C /* main.m */; };
+		28E75455EDFFA95827BDAE1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89345D789698B3F560B01735 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2A3336065AC278921C4D3F1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6346CBF970DEA90A30A3EB51 /* GpuiExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GpuiExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89345D789698B3F560B01735 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9DD8419A8C9FF5F8D24A98E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		E4D12CF40FD2517E96A6BC9A /* gpui_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpui_ios.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		A4B9BC14FDA015526EC32E0C = {
+			isa = PBXGroup;
+			children = (
+				9DD8419A8C9FF5F8D24A98E4 /* Assets.xcassets */,
+				E4D12CF40FD2517E96A6BC9A /* gpui_ios.h */,
+				89345D789698B3F560B01735 /* LaunchScreen.storyboard */,
+				2A3336065AC278921C4D3F1C /* main.m */,
+				AF9B1533A27152B668E65AE9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF9B1533A27152B668E65AE9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6346CBF970DEA90A30A3EB51 /* GpuiExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		79BD1E7B7EEA3163791456AC /* GpuiExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72620EDB3A55DD5E8975241D /* Build configuration list for PBXNativeTarget "GpuiExample" */;
+			buildPhases = (
+				A39104506C1C5329D34E1CB1 /* Build Rust Static Library */,
+				448B63589526A61886A15326 /* Sources */,
+				B29029B35A1282E694840110 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GpuiExample;
+			packageProductDependencies = (
+			);
+			productName = GpuiExample;
+			productReference = 6346CBF970DEA90A30A3EB51 /* GpuiExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58A28AB0C3B55F0E671726C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					79BD1E7B7EEA3163791456AC = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9B134465A63EEF4AF337AF55 /* Build configuration list for PBXProject "GpuiExample" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A4B9BC14FDA015526EC32E0C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AF9B1533A27152B668E65AE9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79BD1E7B7EEA3163791456AC /* GpuiExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B29029B35A1282E694840110 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E00101AFAD0D35CE255EF1E /* Assets.xcassets in Resources */,
+				28E75455EDFFA95827BDAE1A /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A39104506C1C5329D34E1CB1 /* Build Rust Static Library */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Static Library";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -euo pipefail\n\n# Load Rust environment so Xcode finds 'cargo'\nif [ -f \"$HOME/.cargo/env\" ]; then\n  source \"$HOME/.cargo/env\"\nelse\n  export PATH=\"$HOME/.cargo/bin:$PATH\"\nfi\n\nRUST_PROJECT_DIR=\"${PROJECT_DIR}/..\"\ncd \"${RUST_PROJECT_DIR}\"\n\n# Determine the Rust target triple based on Xcode SDK\nif [ \"${PLATFORM_NAME}\" = \"iphonesimulator\" ]; then\n  RUST_TARGET=\"aarch64-apple-ios-sim\"\nelse\n  RUST_TARGET=\"aarch64-apple-ios\"\nfi\n\n# FORCED: Always use release for performance during dictionary imports\nCARGO_FLAGS=\"--release\"\n\necho \"Building gpui-mobile for ${RUST_TARGET} (FORCED RELEASE)...\"\n\n# Ensure the Rust target is installed\nrustup target add \"${RUST_TARGET}\" 2>/dev/null || true\n\n# Build the Rust static library\nRUSTFLAGS=\"-Awarnings\" cargo build --target \"${RUST_TARGET}\" ${CARGO_FLAGS} 2>&1\n\necho \"Rust build complete for ${RUST_TARGET}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		448B63589526A61886A15326 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FFB664B252FC76E0609B2F9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1FE0A9D073A0C3E71FBF56D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 675FAKVU2Q;
+				ENABLE_BITCODE = NO;
+				ENABLE_DEBUG_DYLIB = NO;
+				EXAMPLE_STATIC_LIB = "$(PROJECT_DIR)/../target/$(RUST_TARGET)/release/libgpui_mobile_example.a";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"USE_GPUI_RUST=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(EXAMPLE_STATIC_LIB)",
+					"-lc++",
+					"-framework",
+					UIKit,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreText,
+					"-framework",
+					CoreFoundation,
+					"-framework",
+					Foundation,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					WebKit,
+					"-framework",
+					CoreMedia,
+					"-framework",
+					AVFoundation,
+					"-framework",
+					LocalAuthentication,
+					"-framework",
+					Contacts,
+					"-framework",
+					EventKit,
+					"-framework",
+					StoreKit,
+					"-framework",
+					CoreMotion,
+					"-ObjC",
+				);
+				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.fanni.gpui.mobile.test1;
+				PRODUCT_NAME = GpuiExample;
+				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
+				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Release;
+		};
+		22E4FAB3449886CAF51A4B61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9BSAS444YP;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		28A337C407B4E0EA62318F52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 675FAKVU2Q;
+				ENABLE_BITCODE = NO;
+				ENABLE_DEBUG_DYLIB = NO;
+				EXAMPLE_STATIC_LIB = "$(PROJECT_DIR)/../target/$(RUST_TARGET)/release/libgpui_mobile_example.a";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"USE_GPUI_RUST=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(EXAMPLE_STATIC_LIB)",
+					"-lc++",
+					"-framework",
+					UIKit,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreText,
+					"-framework",
+					CoreFoundation,
+					"-framework",
+					Foundation,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					WebKit,
+					"-framework",
+					CoreMedia,
+					"-framework",
+					AVFoundation,
+					"-framework",
+					LocalAuthentication,
+					"-framework",
+					Contacts,
+					"-framework",
+					EventKit,
+					"-framework",
+					StoreKit,
+					"-framework",
+					CoreMotion,
+					"-ObjC",
+				);
+				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.fanni.gpui.mobile.test1;
+				PRODUCT_NAME = GpuiExample;
+				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
+				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Debug;
+		};
+		B4758651A2BD4DB9BF7FBA57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9BSAS444YP;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72620EDB3A55DD5E8975241D /* Build configuration list for PBXNativeTarget "GpuiExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28A337C407B4E0EA62318F52 /* Debug */,
+				1FE0A9D073A0C3E71FBF56D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9B134465A63EEF4AF337AF55 /* Build configuration list for PBXProject "GpuiExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E4FAB3449886CAF51A4B61 /* Debug */,
+				B4758651A2BD4DB9BF7FBA57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58A28AB0C3B55F0E671726C1 /* Project object */;
+}
