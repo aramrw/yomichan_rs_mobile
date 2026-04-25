@@ -127,3 +127,5 @@ targets:
           echo "Rust build complete for ${RUST_TARGET}"
         shell: /bin/bash
         basedOnDependencyAnalysis: false
+        outputFiles:
+          - $(PROJECT_DIR)/../target/$(RUST_TARGET)/release/libgpui_mobile_example.a

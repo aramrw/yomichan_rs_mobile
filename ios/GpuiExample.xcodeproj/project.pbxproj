@@ -122,10 +122,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../target/$(RUST_TARGET)/release/libgpui_mobile_example.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -euo pipefail\n\n# Load Rust environment so Xcode finds 'cargo'\nif [ -f \"$HOME/.cargo/env\" ]; then\n  source \"$HOME/.cargo/env\"\nelse\n  export PATH=\"$HOME/.cargo/bin:$PATH\"\nfi\n\nRUST_PROJECT_DIR=\"${PROJECT_DIR}/..\"\ncd \"${RUST_PROJECT_DIR}\"\n\n# Determine the Rust target triple based on Xcode SDK\nif [ \"${PLATFORM_NAME}\" = \"iphonesimulator\" ]; then\n  RUST_TARGET=\"aarch64-apple-ios-sim\"\nelse\n  RUST_TARGET=\"aarch64-apple-ios\"\nfi\n\n# FORCED: Always use release for performance during dictionary imports\nCARGO_FLAGS=\"--release\"\n\necho \"Building gpui-mobile for ${RUST_TARGET} (FORCED RELEASE)...\"\n\n# Ensure the Rust target is installed\nrustup target add \"${RUST_TARGET}\" 2>/dev/null || true\n\n# Build the Rust static library\nRUSTFLAGS=\"-Awarnings\" cargo build --target \"${RUST_TARGET}\" ${CARGO_FLAGS} 2>&1\n\necho \"Rust build complete for ${RUST_TARGET}\"\n";
+			shellScript = "set -euo pipefail\n\n# Load Rust environment so Xcode finds 'cargo'\nif [ -f \"$HOME/.cargo/env\" ]; then\n  source \"$HOME/.cargo/env\"\nelse\n  export PATH=\"$HOME/.cargo/bin:$PATH\"\nfi\n\nRUST_PROJECT_DIR=\"${PROJECT_DIR}/..\"\ncd \"${RUST_PROJECT_DIR}\"\n\n# Determine the Rust target triple based on Xcode SDK\nif [ \"${PLATFORM_NAME}\" = \"iphonesimulator\" ]; then\n  RUST_TARGET=\"aarch64-apple-ios-sim\"\nelse\n  RUST_TARGET=\"aarch64-apple-ios\"\nfi\n\n# FORCED: Always use release for performance during dictionary imports\nCARGO_FLAGS=\"--release\"\n\necho \"Building gpui-mobile for ${RUST_TARGET} (FORCED RELEASE)...\"\n\n# Ensure the Rust target is installed\nrustup target add \"${RUST_TARGET}\" 2>/dev/null || true\n\n# Build the Rust static library\ncargo build --target \"${RUST_TARGET}\" ${CARGO_FLAGS} 2>&1\n\necho \"Rust build complete for ${RUST_TARGET}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -214,7 +215,7 @@
 					"-ObjC",
 				);
 				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.fanni.gpui.mobile.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-";
 				PRODUCT_NAME = GpuiExample;
 				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
 				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";
@@ -364,7 +365,7 @@
 					"-ObjC",
 				);
 				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.fanni.gpui.mobile.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-";
 				PRODUCT_NAME = GpuiExample;
 				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
 				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";

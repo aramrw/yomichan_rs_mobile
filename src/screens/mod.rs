@@ -342,6 +342,9 @@ impl Router {
     /// Navigate to a new screen, pushing the current one onto the history stack.
     pub fn navigate_to(&mut self, screen: Screen) {
         if self.current_screen != screen {
+            let _ = gpui_mobile::packages::vibration::haptic_feedback(
+                gpui_mobile::packages::vibration::HapticFeedback::Selection,
+            );
             // Dismiss webview when leaving the browser screen
             // if self.current_screen == Screen::WebViewBrowser {
             //     webview_browser::dismiss_webview();
@@ -382,6 +385,9 @@ impl Router {
     /// Go back to the previous screen. Returns `true` if navigation occurred.
     pub fn go_back(&mut self) -> bool {
         if let Some(prev) = self.history.pop() {
+            let _ = gpui_mobile::packages::vibration::haptic_feedback(
+                gpui_mobile::packages::vibration::HapticFeedback::Selection,
+            );
             // Dismiss webview when leaving browser
             // if self.current_screen == Screen::WebViewBrowser {
             //     webview_browser::dismiss_webview();
