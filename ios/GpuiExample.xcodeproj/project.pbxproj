@@ -215,7 +215,7 @@
 					"-ObjC",
 				);
 				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-";
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-2";
 				PRODUCT_NAME = GpuiExample;
 				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
 				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";
@@ -365,7 +365,7 @@
 					"-ObjC",
 				);
 				OTHER_LINK_BINARY_WITH_LIBRARIES_SECTION_TYPE = static;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-";
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.banas-2";
 				PRODUCT_NAME = GpuiExample;
 				"RUST_TARGET[sdk=iphoneos*]" = "aarch64-apple-ios";
 				"RUST_TARGET[sdk=iphonesimulator*]" = "aarch64-apple-ios-sim";

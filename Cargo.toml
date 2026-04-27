@@ -8,7 +8,7 @@ publish = false
 [lib]
 name = "gpui_mobile_example"
 crate-type = ["cdylib", "staticlib", "lib"]
-path = "src/lib.rs"
+path = "src/main.rs"
 
 [dependencies]
 gpui-mobile = { path = "../gpui-mobile", features = ["file_selector", "vibration"] }
@@ -17,7 +17,7 @@ reqwest_client = { git = "https://github.com/zed-industries/zed", rev = "4dd42a0
 reqwest = { git = "https://github.com/zed-industries/reqwest.git", rev = "c15662463bda39148ba154100dd44d3fba5873a4", package = "zed-reqwest", default-features = false, features = ["rustls-tls"] }
 log = "0.4"
 env_logger = "0.11"
-yomichan_rs = { path = "../yomichan_rs", features = ["anki"] }
+yomichan_rs = { path = "../../yomichan_rs_workspace/yomichan_rs", features = ["anki"] }
 parking_lot = { version = "0.12.4", features = ["arc_lock", "serde", "send_guard"] }
 rusqlite = "0.33.0"
 anyhow = "1.0"
@@ -60,3 +60,8 @@ strip = true
 [profile.dev]
 opt-level = 0
 debug = true
+
+[[bin]]
+name = "yomichanrs_mobile"
+path = "src/main.rs"
+
