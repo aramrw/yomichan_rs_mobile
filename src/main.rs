@@ -10,9 +10,9 @@ pub mod demos;
 pub mod screens;
 pub mod db;
 
-// #[cfg(target_os = "macos")]
-// #[global_allocator]
-// static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+#[cfg(target_os = "macos")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 // --- Globals ---
 #[derive(Clone)]

@@ -111,26 +111,8 @@ impl DictionariesState {
                                 
                                 std::thread::spawn(move || {
                                     log::info!("Import thread started: {:?}", std::thread::current().id());
-                                    #[cfg(target_os = "macos")]
-                                    let guard = pprof::ProfilerGuardBuilder::default()
-                                        .frequency(1000)
-                                        .blocklist(&["libc", "libgcc", "pthread", "vdso"])
-                                        .build()
-                                        .unwrap();
-                                        
-                                    let res = global_yomichan_clone.read().import_dictionaries(&[path_clone]);
                                     
-                                    #[cfg(target_os = "macos")]
-                                    if let Ok(report) = guard.report().build() {
-                                        let timestamp = std::time::SystemTime::now()
-                                            .duration_since(std::time::UNIX_EPOCH)
-                                            .unwrap()
-                                            .as_secs();
-                                        let filename = format!("import_profile_{}.svg", timestamp);
-                                        let file = std::fs::File::create(&filename).unwrap();
-                                        report.flamegraph(file).unwrap();
-                                        log::info!("Wrote {}", filename);
-                                    }
+                                    let res = global_yomichan_clone.read().import_dictionaries(&[path_clone]);
                                     
                                     let _ = tx.send(res);
                                 });
