@@ -1,1 +1,2 @@
-RUSTFLAGS="-Awarnings" cargo r --release
+#!/bin/bash
+../gpui-mobile/gpui-platform.sh "$@"
