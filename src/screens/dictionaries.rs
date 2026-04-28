@@ -103,34 +103,54 @@ impl DictionariesState {
                             let mut cx = cx.clone();
                             let global_yomichan = global_yomichan.clone();
                             async move {
-                                let result = cx
-                                    .background_executor()
-                                    .spawn({
-                                        let global_yomichan = global_yomichan.clone();
-                                        async move {
-                                            global_yomichan.read().import_dictionaries(&[path])
-                                        }
-                                    })
-                                    .await;
+                                let (tx, rx) = std::sync::mpsc::channel();
+                                let path_clone = path.clone();
+                                let global_yomichan_clone = global_yomichan.clone();
+                                
+                                log::info!("Spawning raw thread for import. Current thread: {:?}", std::thread::current().id());
+                                
+                                std::thread::spawn(move || {
+                                    log::info!("Import thread started: {:?}", std::thread::current().id());
+                                    #[cfg(target_os = "macos")]
+                                    let guard = pprof::ProfilerGuardBuilder::default()
+                                        .frequency(1000)
+                                        .blocklist(&["libc", "libgcc", "pthread", "vdso"])
+                                        .build()
+                                        .unwrap();
+                                        
+                                    let res = global_yomichan_clone.read().import_dictionaries(&[path_clone]);
+                                    
+                                    #[cfg(target_os = "macos")]
+                                    if let Ok(report) = guard.report().build() {
+                                        let timestamp = std::time::SystemTime::now()
+                                            .duration_since(std::time::UNIX_EPOCH)
+                                            .unwrap()
+                                            .as_secs();
+                                        let filename = format!("import_profile_{}.svg", timestamp);
+                                        let file = std::fs::File::create(&filename).unwrap();
+                                        report.flamegraph(file).unwrap();
+                                        log::info!("Wrote {}", filename);
+                                    }
+                                    
+                                    let _ = tx.send(res);
+                                });
+
+                                let result = rx.recv().unwrap_or(Err(yomichan_rs::utils::errors::ImportError::ExternalImporter("Thread crashed".into())));
 
                                 match result {
                                     Ok(_) => {
                                         log::info!("import completed!");
                                         let _ = global_yomichan.read().update_options();
-                                        weak_state
-                                            .update(
-                                                &mut cx,
-                                                |_, cx: &mut Context<'_, DictionariesState>| {
-                                                    cx.notify();
-                                                },
-                                            )
-                                            .ok();
+                                        
+                                        // Ensure UI updates from main thread
+                                        weak_state.update(&mut cx, |_, cx: &mut Context<'_, DictionariesState>| {
+                                            cx.notify();
+                                        }).ok();
                                     }
                                     Err(e) => log::error!("import failed:\n  {}", e),
                                 }
                             }
-                        })
-                        .detach();
+                        }).detach();
                     }
                     Err(e) => {
                         log::error!("File picker error: {}", e);

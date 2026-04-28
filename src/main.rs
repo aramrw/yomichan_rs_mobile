@@ -10,6 +10,10 @@ pub mod demos;
 pub mod screens;
 pub mod db;
 
+// #[cfg(target_os = "macos")]
+// #[global_allocator]
+// static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 // --- Globals ---
 #[derive(Clone)]
 pub struct GlobalYomichan(pub Arc<parking_lot::RwLock<Yomichan>>);
@@ -74,7 +78,7 @@ fn nslog(msg: &str) {
 
 // --- Main Entry Point ---
 #[gpui_mobile::main]
-fn main(cx: &mut App) {
+pub fn main(cx: &mut App) {
     // 1. Setup Logging
     #[cfg(target_os = "ios")]
     {

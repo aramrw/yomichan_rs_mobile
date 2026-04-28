@@ -67,7 +67,7 @@ impl SearchState {
 
                     let results = cx
                         .background_executor()
-                        .spawn(async move { ycd.write().search(&term) })
+                        .spawn(async move { ycd.read().search(&term) })
                         .await;
 
                     let _ = this_handle.update(&mut cx, |this, cx| {
